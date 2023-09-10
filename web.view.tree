@@ -1,0 +1,447 @@
+$ss_blocks_noedit $mol_view
+	field *
+		^
+		contentEditable false
+
+$ss_blocks_block $mol_view
+	- minimal_height 25
+	Placeholder $ss_blocks_noedit
+		sub / \test
+	sub /
+		<= default_value \default_block_value
+	value_setted? \default_block_value_changed
+	value_changed? \default_block_value_changed
+	attr *
+		^
+		focus-state <= focus_state? \blurred
+		empty <= empty? false
+	style *
+		^
+		--before <= before_content \
+		--after <= after_content \
+		- color <= color \var(--mol_theme_text)
+		opacity <= opacity 1
+	visible_placeholder \
+	placeholder \
+	on_arrow_right? null
+	on_arrow_left? null
+	on_arrow_up? null
+	on_arrow_down? null
+	on_ctrl_x? null
+	keydown_enter? null
+	before_any_input? null
+	before_insert_text? null
+	delete_backward? null
+	-
+	beforeinput? null
+	keydown? null
+	custom_keydown? null
+	input? null
+	dragenter? null
+	drop? null
+	drag? null
+	dragleave? null
+	paste? null
+	cut? null
+	-
+	event *
+		^
+		mouseout? <=> mouseout? null
+		mouseover? <=> mouseover? null
+	-
+	focused? false
+	hovered? false
+	focused_or_hovered false
+	on_focused_or_hovered* null
+	on_blur null
+	on_focus null
+	add_to_focus_history* null
+	focus null
+	- field *
+		^
+		contentEditable true
+
+$ss_blocks $mol_object2
+	Block* $ss_blocks_block - ts
+	focus_history_dom_ids? /
+	beforeinput? null
+	keydown? null
+	input? null
+	dragenter? null
+	drop? null
+	drag? null
+	dragleave? null
+	paste? null
+	cut? null
+
+$ss_blocks_contenteditable $mol_view
+	Blocks $ss_blocks
+		focus_history_dom_ids => focus_history_dom_ids
+		Block* => Block*
+		beforeinput? => blocks_beforeinput?
+		keydown? => blocks_keydown?
+		input? => blocks_input?
+		dragenter? => blocks_dragenter?
+		drop? => blocks_drop?
+		drag? => blocks_drag?
+		dragleave? => blocks_dragleave?
+		paste? => blocks_paste?
+		cut? => blocks_cut?
+	sub /
+		<= Body $mol_view
+	field *
+		^
+		contentEditable true
+		spellcheck false
+		- contentEditable \plaintext-only
+	event *
+		^
+		beforeinput? <=> blocks_beforeinput?
+		keydown? <=> blocks_keydown?
+		input? <=> blocks_input?
+		dragenter? <=> blocks_dragenter?
+		drop? <=> blocks_drop?
+		drag? <=> blocks_drag?
+		dragleave? <=> blocks_dragleave?
+		paste? <=> blocks_paste?
+		cut? <=> blocks_cut?
+
+$mol_ghost $mol_view
+	Sub $mol_view
+
+$ss_linkpad2_link $mol_ghost
+	ui_type \default
+	only_nodes? true
+	Link_data* null
+	variants *
+		default <= Default $ss_linkpad2_link_default
+			Link_data* <= Link_data*
+			actions <= actions null
+			get_data <= get_data null
+			depth <= depth 0
+			fold* <= fold* null
+			folded? <= folded? false
+			add_new_link* <= add_new_link* null
+			replace* <= replace* null
+			on_hovered*? <=> on_hovered*? null
+			on_focus* <= on_focus* null
+			replace_to_link* <= replace_to_link* null
+			hide_contain? <=> hide_contain? false
+			ui_id <= ui_id null
+			all_link_ids? <= all_link_ids? /string
+			data <= data null
+			Block* <= Block* null
+			to_link <= to_link null
+			links <= links /$ss_linkpad2_link
+			- Name_block => Default_name_block
+		node <= Node $ss_linkpad2_link_node
+			Link_data* <= Link_data*
+			actions <= actions
+			get_data <= get_data
+			depth <= depth
+			fold* <= fold*
+			folded? <= folded?
+			add_new_link* <= add_new_link*
+			replace* <= replace*
+			on_hovered*? <=> on_hovered*?
+			on_focus* <= on_focus*
+			replace_to_link* <= replace_to_link*
+			hide_contain? <=> hide_contain?
+			ui_id <= ui_id
+			all_link_ids? <= all_link_ids? 
+			data <= data
+			Block* <= Block*
+			to_link <= to_link
+			links <= links
+			Self => Node_self
+			Label => Node_label
+			label_sub => Node_label_sub
+			node_color => node_color
+		root <= Root $ss_linkpad2_link_root
+			Link_data* <= Link_data*
+			actions <= actions
+			get_data <= get_data
+			depth <= depth
+			fold* <= fold*
+			folded? <= folded?
+			add_new_link* <= add_new_link*
+			replace* <= replace*
+			on_hovered*? <=> on_hovered*?
+			on_focus* <= on_focus*
+			replace_to_link* <= replace_to_link*
+			hide_contain? <=> hide_contain?
+			ui_id <= ui_id
+			all_link_ids? <= all_link_ids? 
+			data <= data
+			Block* <= Block*
+			to_link <= to_link
+			links <= links
+		loop <= Loop $ss_linkpad2_link_loop
+			Link_data* <= Link_data*
+			actions <= actions
+			get_data <= get_data
+			depth <= depth
+			fold* <= fold*
+			folded? <= folded?
+			add_new_link* <= add_new_link*
+			replace* <= replace*
+			on_hovered*? <=> on_hovered*?
+			on_focus* <= on_focus*
+			replace_to_link* <= replace_to_link*
+			hide_contain? <=> hide_contain?
+			ui_id <= ui_id
+			all_link_ids? <= all_link_ids? 
+			data <= data
+			Block* <= Block*
+			to_link <= to_link
+			links <= links
+		- type_link <= Type_link $ss_linkpad2_link_type
+			Link_data* <= Link_data*
+			add_new_link* <= add_new_link*
+			replace* <= replace*
+			replace_to_link* <= replace_to_link*
+			hide_contain? <=> hide_contain?
+			ui_id <= ui_id
+			all_link_ids? <= all_link_ids?
+			data <= data
+			- type_data <= type_data
+			Block* <= Block*
+			to_link <= to_link
+			links <= links
+			- Name_block => Type_name_block
+		- undef <= Undef $ss_linkpad2_link_undef
+			Link_data* <= Link_data*
+			add_new_link* <= add_new_link*
+			replace* <= replace*
+			replace_to_link* <= replace_to_link*
+			hide_contain? <=> hide_contain?
+			ui_id <= ui_id
+			all_link_ids? <= all_link_ids?
+			data <= data
+			- type_data <= type_data
+			Block* <= Block*
+			to_link <= to_link
+			links <= links
+			Name_block => Undef_name_block
+		- page <= Page $ss_linkpad2_link_page
+			Link_data* <= Link_data*
+			add_new_link* <= add_new_link*
+			replace* <= replace*
+			replace_to_link* <= replace_to_link*
+			hide_contain? <=> hide_contain?
+			ui_id <= ui_id
+			all_link_ids? <= all_link_ids?
+			data <= data
+			- type_data <= type_data
+			Block* <= Block*
+			to_link <= to_link
+			links <= links
+			Name_block => Page_name_block
+
+$mol_scroll $mol_view
+	scroll_top? 0
+	scroll_left? 0
+	field *
+		^
+		tabIndex <= tabindex -1
+	event *
+		^
+		scroll?event <=> event_scroll?event null
+
+$ss_linkpad2_scroll $mol_scroll
+	event *
+		^
+		wheel? <=> event_wheel? null
+		touchmove? <=> event_touchmove? null
+
+$ss_linkpad2 $mol_view
+	color_gen $ss_linkpad2_color_generator
+	raw_gql_path? \
+	right_link_id? \
+	sub /
+		<= Float_line $mol_view
+		<= Lines $ss_linkpad2_scroll
+			sub /
+				<= Page_row $mol_view
+					sub /
+						- <= Gap*right $mol_view
+						<= Contenteditable
+						- <= Gap*left $mol_view
+			event_wheel? <=> event_wheel? null
+			event_touchmove? <=> event_wheel?
+	Contenteditable $ss_blocks_contenteditable
+		Body <= Root_link? null
+		Block* => Block*
+		Blocks => Blocks
+		focus_history_dom_ids => focus_history_dom_ids
+	Contenteditable_package $ss_blocks_contenteditable
+		Body <= Root_package_link? null
+		Blocks <= Blocks
+	all_link_ids? /string
+	Link_data* null
+	outline_sel_ui_id? null
+	Link* $ss_linkpad2_link
+		- mode? <= mode? \text
+		actions <= actions *
+		get_data <= get_data *
+		- only_nodes? <= only_nodes? false
+		folded? <= folded*? false
+		fold* <= fold* null
+		Link_data* <= Link_data*
+		add_new_link* <= add_new_link* null
+		replace* <= replace* null
+		on_hovered*? <=> on_hovered*? null
+		on_focus* <= on_focus* null
+		replace_to_link* <= replace_to_link* null
+		hide_contain? <=> hide_contain? false
+		ui_id <= ui_id* null
+		depth <= depth* 0
+		all_link_ids? <= all_link_ids?
+		data <= link_data_by_ui_id* null
+		Block* <= Block*
+		to_link <= to_link* null
+		links <= link_links* /$ss_linkpad2_link
+	link_links_id*? /string
+
+$ss_linkpad2_link_hover $mol_view
+	hovered? false
+	event *
+		^
+		mouseenter? <=> mouseenter? null
+		mouseleave? <=> mouseleave? null
+
+$ss_linkpad2_link_default $mol_view
+	ui_id null
+	all_link_ids? /string
+	Link_data* null
+	type_name \Type
+	hide_contain? true
+	depth 0
+	fold* null
+	data $ss_linkpad2_link_data
+		from_id => from_id
+		id => link_id
+	type_data $ss_linkpad2_link_data
+	Block* $ss_blocks_block
+	actions *
+	get_data *
+	type_and_name /
+		<= Type $ss_blocks_noedit
+			sub / <= type_name
+		<= Name_disabled $ss_blocks_noedit
+			sub / <= name \
+	Link_id $ss_blocks_noedit
+		sub /
+			\-
+			<= from_id
+			\>
+			<= link_id
+	value_and_id /
+		<= Value $mol_view
+			sub / 
+				<= Value_block $ss_blocks_block - this.Block*id+':value'
+		- <= Link_id
+	links /$ss_linkpad2_link
+	add_new_link* null
+	replace* null
+	replace_to_link* null
+	links_view /
+		<= Links $mol_view
+			sub /
+				^ links
+	to_link_view /
+		<= To_link $mol_view
+			sub /
+				<= to_link $ss_linkpad2_link
+					Node_self => To_link_self
+					Node_label => To_link_label
+					Node_label_sub => to_link_label_sub
+					node_color => node_color
+	sub /
+		<= Prefix $ss_blocks_noedit
+			sub / \
+		<= Body $mol_view
+			sub <= body /
+				<= Self
+				^ to_link_view
+				^ links_view
+	Self $ss_linkpad2_link_hover
+		sub <= self /
+			<= Label $mol_view
+				sub <= label_sub /
+					- <= Float $ss_blocks_noedit
+						sub / <= type_name
+					^ to_link_label_sub
+		hovered? => self_hovered?
+		mouseenter => mouseenter
+	Left_area $ss_blocks_noedit
+		sub / \
+		attr *
+			data-block-id <= block_dom_id \
+	Right_area $ss_blocks_noedit
+		sub / \
+		attr *
+			data-block-id <= block_dom_id \
+	hovered false
+	set_mouseenter_event* null
+	on_hovered*? null
+	on_focus* null
+	-
+	attr *
+		node <= is_node true
+		hide-last-line <= hide_last_line? true
+		has-links <= has_links true
+		has-name <= has_name true
+		folded <= folded? false
+		focused <= focused false
+	style *
+		^
+		--nodecolor <= node_color
+		--color <= color \transparent
+		--semitransporent <= semitransporent \transparent
+		--typename <= type_name_before \
+		--linecolor \rgba(255,255,255,0.1)
+	event *
+		^
+		focuslineover? <=> focuslineover? null
+
+$ss_linkpad2_link_node $ss_linkpad2_link_default
+	body /
+		^ links_view
+	to_link_label_sub /
+	Self $ss_linkpad2_link_hover
+		sub <= self /
+			<= Label $ss_blocks_noedit
+				sub <= label_sub /
+					<= Left_area
+					- <= Float $ss_blocks_noedit
+						sub / <= type_name
+					^ value_and_id
+					<= Right_area
+		hovered? => self_hovered?
+		mouseenter => mouseenter
+	node_color <= color
+
+$ss_linkpad2_link_root $ss_linkpad2_link_default
+	body /
+		<= Self
+		^ links_view
+	to_link_label_sub /
+	node_color \transparent
+
+$ss_linkpad2_link_loop $ss_linkpad2_link_default
+	body /
+		<= Self
+		^ links_view
+	to_link_label_sub /
+	Self $ss_linkpad2_link_hover
+		sub <= self /
+			<= Label $mol_view
+				sub <= label_sub /
+					<= Float $ss_blocks_noedit
+						sub / <= type_name
+					- ^ type_and_name
+					^ value_and_id
+		hovered? => self_hovered?
+		mouseenter => mouseenter
+	node_color <= color
